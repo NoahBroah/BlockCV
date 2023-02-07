@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { UserContext } from "../UserContext";
+import Profile from "./Profile";
 function Home() {
   const [user] = useContext(UserContext);
 
   return (
     <div>
       {!user ? (
-        "hello"
+        "Please Login or Signup"
       ) : (
         <div>
-          <h2>{user.first_name} {user.last_name}</h2>
-          <h3>{user.email}</h3>
+          <Profile />
         </div>
       )}
     </div>

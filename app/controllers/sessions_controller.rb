@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
             session[:user_id] = employer.id
             session[:is_employer] = 1
             render json: employer, status: :created
+            
         else
             render json: { errors: "Invalid Username or Password"}, status: :unauthorized
         end

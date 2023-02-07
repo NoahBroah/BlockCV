@@ -40,7 +40,7 @@ function EmployerLogin({ changeAuthMode }) {
       <div className="Auth-form-container">
         <form className="Auth-form" onSubmit={handleEmployerLogin}>
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Employer Signup</h3>
+            <h3 className="Auth-form-title">Employer Login</h3>
             <div className="text-center">
               Not an Employer?{" "}
               <span className="link-primary" onClick={changeAuthMode}>

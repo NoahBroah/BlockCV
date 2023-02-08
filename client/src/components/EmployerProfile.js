@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../UserContext';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function EmployerProfile() {
     const [user, setUser] = useContext(UserContext);
@@ -38,7 +38,7 @@ function EmployerProfile() {
               </ul>
             )}
             <div>
-                <button>Edit Profile</button> <button onClick={() => handleDeleteEmployerProfile(user.id)}>Delete Profile</button>
+            <Link to='/edit_profile'>Edit Profile</Link> <button onClick={() => handleDeleteEmployerProfile(user.id)}>Delete Profile</button>
             </div>
             <div>
 

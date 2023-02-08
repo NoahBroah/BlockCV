@@ -6,6 +6,7 @@ import { UserProvider } from "./UserContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import EditProfiles from "./components/EditProfiles";
 
 function App() {
  
@@ -44,6 +45,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path='/edit_profile'>
+              <EditProfiles/>
             </Route>
           </Switch>
         </div>

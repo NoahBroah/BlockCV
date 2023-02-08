@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from "../UserContext";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Profile() {
     const [user, setUser] = useContext(UserContext);
@@ -20,6 +20,7 @@ function Profile() {
           })
         console.log("delete")
     }
+
   return (
     <div>
         <div>
@@ -37,7 +38,7 @@ function Profile() {
               </ul>
             )}
             <div>
-                <button>Edit Profile</button> <button onClick={() => handleDeleteUserProfile(user.id)}>Delete Profile</button>
+                <Link to='/edit_profile'>Edit Profile</Link> <button onClick={() => handleDeleteUserProfile(user.id)}>Delete Profile</button>
             </div>
             <div>
 

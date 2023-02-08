@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2023_02_08_001154) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_employer"
+    t.boolean "is_employer", default: false
   end
 
   create_table "employers", force: :cascade do |t|
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2023_02_08_001154) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_employer"
+    t.boolean "is_employer", default: true
   end
 
 end

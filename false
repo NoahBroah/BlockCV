@@ -1,2 +1,0 @@
-      invoke  active_record
-      remove    db/migrate/20230208000237_add_is_employer_to_employees.rb

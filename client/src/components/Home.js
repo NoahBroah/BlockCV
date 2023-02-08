@@ -11,13 +11,15 @@ function Home() {
         "Please Login or Signup"
       ) : (
         <div>
-          <div>
-            <UserProfile />
-          </div>
-          <div>
-            <EmployerProfile />
-          </div>
-          
+          {user.is_employer === false ? (
+            <div>
+              <UserProfile />
+            </div>
+          ) : (
+            <div>
+              <EmployerProfile />
+            </div>
+          )}
         </div>
       )}
     </div>

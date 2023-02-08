@@ -21,7 +21,7 @@ function Profile() {
     <div>
         <div>
             <div>
-                <h2>{user.first_name} {user.last_name}</h2>
+                <h2>Employee: {user.first_name} {user.last_name}</h2>
             </div>
             <div>
                 <h3>{user.email}</h3>

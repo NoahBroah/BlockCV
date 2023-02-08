@@ -1,11 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../UserContext';
+import { useHistory } from "react-router-dom";
 
 function EmployerProfile() {
-    const [user] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
+    const [errors, setErrors] = useState([]);
+    const history = useHistory();
 
-    function handleDeleteEmployerProfile() {
-        console.log("Delete!")
+    function handleDeleteEmployerProfile(id) {
+        fetch(`/employers/${id}`, {
+            method: "DELETE",
+          }).then(res => {
+            if(res.ok) {
+              setUser(null)
+              history.push('/login')
+            } else {
+              res.json().then( res => setErrors(res.errors))
+            }
+          })
+        console.log("delete")
     }
 
   return (
@@ -17,8 +30,15 @@ function EmployerProfile() {
             <div>
                 <h3>{user.email}</h3>
             </div>
+            {errors.length > 0 && (
+              <ul style={{ color: "red" }}>
+                {errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
             <div>
-                <button>Edit Profile</button> <button onClick={handleDeleteEmployerProfile}>Delete Profile</button>
+                <button>Edit Profile</button> <button onClick={() => handleDeleteEmployerProfile(user.id)}>Delete Profile</button>
             </div>
             <div>
 

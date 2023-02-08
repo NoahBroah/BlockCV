@@ -1,20 +1,23 @@
-import React, { useContext } from 'react'
-import { Col, Container, Row } from 'react-bootstrap';
+import React, { useContext, useState } from 'react'
 import { UserContext } from "../UserContext";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
-    const [user] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
+    const [errors, setErrors] = useState([]);
+    const history = useHistory();
 
-    function handleDeleteUserProfile() {
-        // fetch(`/employees`, {
-        //     method: "DELETE",
-        //   }).then(res => {
-        //     if(res.ok) {
-        //       setNotes(notes.filter((note) => note.id !== id))
-        //     } else {
-        //       res.json().then( res => setErrors(res.errors))
-        //     }
-        //   })
+    function handleDeleteUserProfile(id) {
+        fetch(`/employees/${id}`, {
+            method: "DELETE",
+          }).then(res => {
+            if(res.ok) {
+              setUser(null)
+              history.push('/login')
+            } else {
+              res.json().then( res => setErrors(res.errors))
+            }
+          })
         console.log("delete")
     }
   return (
@@ -26,8 +29,15 @@ function Profile() {
             <div>
                 <h3>{user.email}</h3>
             </div>
+            {errors.length > 0 && (
+              <ul style={{ color: "red" }}>
+                {errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
             <div>
-                <button>Edit Profile</button> <button onClick={handleDeleteUserProfile}>Delete Profile</button>
+                <button>Edit Profile</button> <button onClick={() => handleDeleteUserProfile(user.id)}>Delete Profile</button>
             </div>
             <div>
 

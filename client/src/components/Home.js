@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../UserContext";
-import Profile from "./UserProfile";
+import EmployerProfile from "./EmployerProfile";
+import UserProfile from "./UserProfile";
 function Home() {
   const [user] = useContext(UserContext);
 
@@ -10,7 +11,13 @@ function Home() {
         "Please Login or Signup"
       ) : (
         <div>
-          <Profile />
+          <div>
+            <UserProfile />
+          </div>
+          <div>
+            <EmployerProfile />
+          </div>
+          
         </div>
       )}
     </div>

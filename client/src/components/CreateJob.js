@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../UserContext";
+import { JobsContext } from "../JobsContext";
+// import { UserContext } from "../UserContext";
 
 function CreateJob() {
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [jobDuties, setJobDuties] = useState("");
   const [errors, setErrors] = useState([]);
-  const [user, setUser] = useContext(UserContext);
+  // const [user, setUser] = useContext(UserContext);
+  const [jobs, setJobs] = useContext(JobsContext)
 
   function handleCreateJob(e) {
     e.preventDefault();
@@ -29,7 +31,7 @@ function CreateJob() {
           setErrors([job.errors]);
         } else {
           console.log("New Job");
-          setUser(user);
+          setJobs([...jobs, newJob]);
         }
       });
   }

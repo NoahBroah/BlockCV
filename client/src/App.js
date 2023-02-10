@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import EditProfiles from "./components/EditProfiles";
+import CreateJob from "./components/CreateJob";
 
 function App() {
  
@@ -48,6 +49,9 @@ function App() {
             </Route>
             <Route exact path='/edit_profile'>
               <EditProfiles/>
+            </Route>
+            <Route exact path='/create_job'>
+              <CreateJob/>
             </Route>
           </Switch>
         </div>

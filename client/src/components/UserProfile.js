@@ -41,7 +41,19 @@ function Profile() {
                 <Link to='/edit_profile'>Edit Profile</Link> <button onClick={() => handleDeleteUserProfile(user.id)}>Delete Profile</button>
             </div>
             <div>
-
+              <h2>Jobs:</h2>
+              <div>
+                {user.jobs.map((job) => {
+                  return (
+                    <Link key={job.id} to={`my_jobs/${job.id}`}>
+                      <li>{job.company}</li>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+            <div>
+                <Link to='/create_job'>Create a new job</Link>
             </div>
         </div>
     </div>

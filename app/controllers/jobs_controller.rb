@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
     def create
         employee = @current_user
-        job = user.jobs.create(job_params)
+        job = employee.jobs.create(job_params)
         if job.valid? && (session[:is_employer] === 0)
             render json: job, status: :created
         else
@@ -10,11 +10,13 @@ class JobsController < ApplicationController
     end
 
     def show
-
+        job = Job.find_by(id: params[:id])
+        render json: job, status: :ok
     end
 
     def index
-
+        jobs = Job.all
+        render json: jobs, status: :ok
     end
 
 

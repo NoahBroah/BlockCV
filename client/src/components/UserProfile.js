@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from "../UserContext";
 import { Link, useHistory } from "react-router-dom";
-
+import { MdOutlineVerified } from "react-icons/md";
+import { TfiFaceSad, TfiFaceSmile } from "react-icons/tfi"
 function Profile() {
     const [user, setUser] = useContext(UserContext);
     const [errors, setErrors] = useState([]);
@@ -46,7 +47,7 @@ function Profile() {
                 {user.jobs.map((job) => {
                   return (
                     <Link key={job.id} to={`my_jobs/${job.id}`}>
-                      <li>{job.company}</li>
+                      <li>{job.company}    {false ? (<TfiFaceSmile/>) : (<TfiFaceSad/>) }</li> 
                     </Link>
                   )
                 })}

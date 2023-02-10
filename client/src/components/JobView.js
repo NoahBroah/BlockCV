@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 function JobView() {
   const { id } = useParams();
   const [jobs, setJobs] = useContext(JobsContext);
-  const [errors, setErrors] = useState([]);
 
 
   const job = jobs.find((job) => job.id == id) ?? {};

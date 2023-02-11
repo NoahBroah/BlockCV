@@ -23,52 +23,45 @@ function EmployerProfile({ setVerifications, verifications }) {
     console.log("delete");
   }
 
-  function handleVerify(id) {
-
+  function handleVerify(eId, jId) {
     const request = {
-      employee_id: id,
+      employee_id: eId,
       is_verified: true,
     };
 
     fetch("/verifications", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(request)
+      body: JSON.stringify(request),
+    })
+      .then((resp) => resp.json())
+      .then((request) => {
+        if (request.errors) {
+          console.log("NOOOO");
+          setErrors([request.errors]);
+        } else {
+          console.log(request);
+          setVerifications([...verifications, request]);
+        }
+      });
+      
+
+    fetch(`/jobs/${jId}`, {
+      method: "PATCH",
+      header: { "Content-Type" : "application/json"},
+      body: JSON.stringify({ verified: true }),
     })
     .then((resp) => resp.json())
-    .then((request) => {
-      if (request.errors) {
-        console.log("NOOOO");
-        setErrors(request.errors)
+    .then((resp) => {
+      if (resp?.errors) {
+        setErrors(resp.errors)
+        console.log("try again")
       } else {
-        console.log(request)
-        setVerifications([...verifications,request])
+        console.log(resp)
+        console.log(jobs)
       }
     })
-    }
-
-  // function handleVerify(id) {
-  //   const request = {
-  //     is_verified: true,
-  //     employer_id: user.id,
-  //   }
-
-  //   fetch(`/verifications/${id}`, {
-  //     method: "PATCH",
-  //     header: { "Content-Type" : "application/json"},
-  //     body: JSON.stringify(request),
-  //   })
-  //   .then((resp) => resp.json())
-  //   .then((resp) => {
-  //     if (resp?.errors) {
-  //       setErrors(resp.errors)
-  //       console.log("try again")
-  //     } else {
-  //       console.log(resp)
-  //       console.log(request)
-  //     }
-  //   })
-  // }
+  }
   return (
     <div>
       <div>
@@ -81,13 +74,15 @@ function EmployerProfile({ setVerifications, verifications }) {
           <h3>{user.email}</h3>
           <h3>{user.company}</h3>
         </div>
-        {errors.length > 0 && (
-          <ul style={{ color: "red" }}>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        )}
+        <div>
+          {errors.length > 0 && (
+            <ul style={{ color: "red" }}>
+              {errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          )}
+        </div>
         <div>
           <Link to="/edit_profile">Edit Profile</Link>{" "}
           <button onClick={() => handleDeleteEmployerProfile(user.id)}>
@@ -109,7 +104,11 @@ function EmployerProfile({ setVerifications, verifications }) {
                     <a>{filteredJob.job_duties}</a>
                   </ul>
                   <div>
-                    <button onClick={() => handleVerify(filteredJob.employee.id)}>Verify</button>
+                    <button
+                      onClick={() => handleVerify(filteredJob.employee.id, filteredJob.id)}
+                    >
+                      Verify
+                    </button>
                   </div>
                 </div>
               ))}

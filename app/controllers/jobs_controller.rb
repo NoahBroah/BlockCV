@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+    skip_before_action :authorize, only: :destroy
     def create
         employee = @current_user
         job = employee.jobs.create(job_params)
@@ -19,11 +20,22 @@ class JobsController < ApplicationController
         render json: jobs, status: :ok
     end
 
+    def update
+        job = Job.find_by(id: params[:id])
+        if job
+            job.update(verified: :verified)
+            render json: job, status: :created
+        else
+            render json: { errors: job.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
+
 
     def destroy
         employee = @current_user
         job = Job.find_by(id: params[:id])
-        if employee.id == job.employee_id
+        if job
+        # employee.id == job.employee_id
             job.delete
             head :no_content
         else
@@ -34,6 +46,6 @@ class JobsController < ApplicationController
     private
 
     def job_params
-        params.permit(:company, :position, :job_duties)
+        params.permit(:company, :position, :job_duties, :verified, :id)
     end
 end

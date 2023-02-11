@@ -18,10 +18,10 @@ function App() {
     fetch("/verifications").then((resp) => {
       if (resp.ok) {
         resp.json().then((verifications) => setVerifications(verifications));
-        console.log(verifications)
       } else {
         resp.json().then((errorData) => setErrors(errorData.errors));
       }
+      console.log(verifications)
     });
   }, []);
 

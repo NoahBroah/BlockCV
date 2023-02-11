@@ -31,6 +31,11 @@ class VerificationsController < ApplicationController
     #     end
     # end
 
+    def destroy
+        verification = Verification.find_by(id: params[:id])
+        verification.delete
+        head :no_content
+    end
 
 
     private

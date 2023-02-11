@@ -7,6 +7,7 @@ function SignupFormEmployers({ changeAuthMode }) {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("")
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useContext(UserContext);
 
@@ -19,6 +20,7 @@ function SignupFormEmployers({ changeAuthMode }) {
       last_name: lastName,
       email: email,
       password: password,
+      company: company
     };
     fetch("/employers", {
       method: "POST",
@@ -32,6 +34,7 @@ function SignupFormEmployers({ changeAuthMode }) {
         } else {
           setUser(newEmployer);
             history.push('/')
+            console.log(newEmployer)
         }
       });
   }
@@ -46,6 +49,16 @@ function SignupFormEmployers({ changeAuthMode }) {
             <span className="link-primary" onClick={changeAuthMode}>
               Sign In
             </span>
+          </div>
+          <div className="form-group mt-3">
+            <label>Company Name</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              placeholder="Enter Company Name"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
           </div>
           <div className="form-group mt-3">
             <label>First Name</label>

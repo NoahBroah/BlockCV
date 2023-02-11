@@ -29,6 +29,7 @@ function EmployerProfile() {
             </div>
             <div>
                 <h3>{user.email}</h3>
+                <h3>{user.company}</h3>
             </div>
             {errors.length > 0 && (
               <ul style={{ color: "red" }}>

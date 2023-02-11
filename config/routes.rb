@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :verificatiions
   resources :jobs
   resources :employers
   resources :employees

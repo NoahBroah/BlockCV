@@ -1,31 +1,37 @@
 class VerificationsController < ApplicationController
     def create
         employee = @current_user
-        verifcation = employee.verifcation.create(verifcation_params)
-        if verifcation.valid? && (session[:is_employer] === 0)
+        verification = employee.verifications.create(verification_params)
+        if verification.valid? && (session[:is_employer] === 0)
             render json: verification, status: :created
         else
-            render json: { errors: verifcation.errors.full_messages }, status: :unprocessable_entity
+            render json: { errors: verification.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
     def index
-        verifcation = Verification.all
-        render json: status: :ok
+        verification = Verification.all
+        render json: verification, status: :ok
     end
 
     def show
-        verifcation = Verification.find_by(id: params[:id])
-        render json: verifcation, status: :ok
+        verification = Verification.find_by(id: params[:id])
+        render json: verification, status: :ok
     end
 
     def update
         employer = @current_user
-        verifcation = Verification.find_by(id: params[:id])
+        verification = Verification.find_by(id: params[:id])
         if session[:is_employer] === 1 
-            render json: verifcation, status: :created
+            render json: verification, status: :created
         else
-            render json: { errors: verifcation.errors.full_messages }, status: :unprocessable_entity
+            render json: { errors: verification.errors.full_messages }, status: :unprocessable_entity
         end
+    end
+
+    private
+
+    def verification_params
+        params.permit(:is_verified, :verification)
     end
 end

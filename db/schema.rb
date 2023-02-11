@@ -45,16 +45,6 @@ ActiveRecord::Schema.define(version: 2023_02_11_044155) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "verificatiions", force: :cascade do |t|
-    t.bigint "employer_id", null: false
-    t.bigint "employee_id", null: false
-    t.boolean "is_verified"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id"], name: "index_verificatiions_on_employee_id"
-    t.index ["employer_id"], name: "index_verificatiions_on_employer_id"
-  end
-
   create_table "verifications", force: :cascade do |t|
     t.bigint "employer_id"
     t.bigint "employee_id", null: false
@@ -65,8 +55,6 @@ ActiveRecord::Schema.define(version: 2023_02_11_044155) do
     t.index ["employer_id"], name: "index_verifications_on_employer_id"
   end
 
-  add_foreign_key "verificatiions", "employees"
-  add_foreign_key "verificatiions", "employers"
   add_foreign_key "verifications", "employees"
   add_foreign_key "verifications", "employers"
 end

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignupForm from "./components/SignupForm";
@@ -12,25 +12,20 @@ import CreateJob from "./components/CreateJob";
 import JobView from "./components/JobView";
 
 function App() {
-  // useEffect(() => {
-  //   fetch("/employees").then((resp) => {
-  //     if (resp.ok) {
-  //       resp.json().then((user) => setCurrentUser(user));
-  //     } else {
-  //       resp.json().then((errorData) => setErrors(errorData.errors));
-  //     }
-  //   });
-  // }, []);
+  const [verifications, setVerifications] = useState([])
+  const [errors, setErrors] = useState([])
+  useEffect(() => {
+    fetch("/verifications").then((resp) => {
+      if (resp.ok) {
+        resp.json().then((verifications) => setVerifications(verifications));
+        console.log(verifications)
+      } else {
+        resp.json().then((errorData) => setErrors(errorData.errors));
+      }
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   fetch("/employers").then((resp) => {
-  //     if (resp.ok) {
-  //       resp.json().then((user) => setCurrentUser(user));
-  //     } else {
-  //       resp.json().then((errorData) => setErrors(errorData.errors));
-  //     }
-  //   });
-  // }, []);
+ 
 
   return (
     <UserProvider>
@@ -43,7 +38,7 @@ function App() {
                 <SignupForm />
               </Route>
               <Route exact path="/">
-                <Home />
+                <Home verifications={verifications} setVerifications={setVerifications}/>
               </Route>
               <Route exact path="/login">
                 <Login />
@@ -55,7 +50,7 @@ function App() {
                 <CreateJob />
               </Route>
               <Route exact path="/my_jobs/:id">
-                <JobView />
+                <JobView verifications={verifications} setVerifications={setVerifications}/>
               </Route>
             </Switch>
           </div>

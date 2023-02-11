@@ -16,7 +16,7 @@ function Profile() {
               setUser(null)
               history.push('/login')
             } else {
-              res.json().then( res => setErrors(res.errors))
+              res.json().then( res => setErrors([res.errors]))
             }
           })
         console.log("delete")

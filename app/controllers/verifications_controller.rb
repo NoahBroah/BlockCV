@@ -1,8 +1,8 @@
 class VerificationsController < ApplicationController
     def create
-        employee = @current_user
-        verification = employee.verifications.create(verification_params)
-        if verification.valid? && (session[:is_employer] === 0)
+        employer = @current_user
+        verification = employer.verifications.create(verification_params)
+        if verification.valid? && (session[:is_employer] === 1)
             render json: verification, status: :created
         else
             render json: { errors: verification.errors.full_messages }, status: :unprocessable_entity
@@ -10,8 +10,8 @@ class VerificationsController < ApplicationController
     end
 
     def index
-        verification = Verification.all
-        render json: verification, status: :ok
+        verifications = Verification.all
+        render json: verifications, status: :ok
     end
 
     def show
@@ -19,19 +19,23 @@ class VerificationsController < ApplicationController
         render json: verification, status: :ok
     end
 
-    def update
-        employer = @current_user
-        verification = Verification.find_by(id: params[:id])
-        if session[:is_employer] === 1 
-            render json: verification, status: :created
-        else
-            render json: { errors: verification.errors.full_messages }, status: :unprocessable_entity
-        end
-    end
+    # def update
+    #     employer = @current_user
+    #     verification = Verification.find_by(id: params[:id])
+    #     # verification = employer.verifications.find_by(id: params[:id])
+    #     if session[:is_employer] === 1 
+    #         verification.update(verification_params)
+    #         render json: verification, status: :created
+    #     else
+    #         render json: { errors: verification.errors.full_messages }, status: :unprocessable_entity
+    #     end
+    # end
+
+
 
     private
 
     def verification_params
-        params.permit(:is_verified, :employer_id)
+        params.permit(:is_verified, :id, :employee_id)
     end
 end

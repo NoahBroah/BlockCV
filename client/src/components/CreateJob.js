@@ -31,7 +31,7 @@ function CreateJob() {
           setErrors([job.errors]);
         } else {
           console.log("New Job");
-          setJobs([...jobs, newJob]);
+          setJobs(...jobs, newJob);
         }
       });
   }

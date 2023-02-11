@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../UserContext";
 import EmployerProfile from "./EmployerProfile";
 import UserProfile from "./UserProfile";
-function Home() {
+function Home({ verifications, setVerifications}) {
   const [user] = useContext(UserContext);
 
   return (
@@ -17,7 +17,7 @@ function Home() {
             </div>
           ) : (
             <div>
-              <EmployerProfile />
+              <EmployerProfile verifications={verifications} setVerifications={setVerifications}/>
             </div>
           )}
         </div>

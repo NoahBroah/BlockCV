@@ -3,4 +3,6 @@ class Employer < ApplicationRecord
 
     validates :email, uniqueness: true, presence: true
     validates :password, :first_name, :last_name, presence: true
+
+    has_many :employees, through: :verifications
 end

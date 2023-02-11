@@ -32,6 +32,6 @@ class VerificationsController < ApplicationController
     private
 
     def verification_params
-        params.permit(:is_verified, :verification)
+        params.permit(:is_verified, :employer_id)
     end
 end

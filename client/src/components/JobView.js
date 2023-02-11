@@ -14,7 +14,7 @@ function JobView() {
   function hanldeVerificationRequest() {
 
     const request = {
-      is_verified: false,
+      employer_id: null
     };
 
     fetch("/verifications", {

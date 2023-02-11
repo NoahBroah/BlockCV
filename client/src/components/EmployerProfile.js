@@ -22,7 +22,7 @@ function EmployerProfile({ setVerifications, verifications }) {
     });
     console.log("delete");
   }
-  
+
   function handleVerify(id) {
 
     const request = {

@@ -19,17 +19,7 @@ class VerificationsController < ApplicationController
         render json: verification, status: :ok
     end
 
-    # def update
-    #     employer = @current_user
-    #     verification = Verification.find_by(id: params[:id])
-    #     # verification = employer.verifications.find_by(id: params[:id])
-    #     if session[:is_employer] === 1 
-    #         verification.update(verification_params)
-    #         render json: verification, status: :created
-    #     else
-    #         render json: { errors: verification.errors.full_messages }, status: :unprocessable_entity
-    #     end
-    # end
+  
 
     def destroy
         verification = Verification.find_by(id: params[:id])

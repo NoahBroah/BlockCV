@@ -54,54 +54,42 @@ function Profile() {
     }
 
   return (
-    <div className="profile-container">
-    <div className="profile-header">
-      <div className="profile-name">
-        <h2>Employee: {user.first_name} {user.last_name}</h2>
-      </div>
-      <div className="profile-email">
-        <h3>{user.email}</h3>
-      </div>
+    <div>
+        <div>
+            <div>
+                <h2>Employee: {user.first_name} {user.last_name}</h2>
+            </div>
+            <div>
+                <h3>{user.email}</h3>
+            </div>
+            {errors.length > 0 && (
+              <ul style={{ color: "red" }}>
+                {errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
+            <div>
+                <Link to='/edit_profile'>Edit Profile</Link> <button onClick={() => handleDeleteUserProfile(user.id)}>Delete Profile</button>
+            </div>
+            <div>
+              <h2>Jobs:</h2>
+              <div>
+                {user.jobs.map((job) => {
+                  console.log(user.verifications)
+                  return (
+                    <Link key={job.id} to={`my_jobs/${job.id}`}>
+                      <li>{job.company}    {user.verifications.filter((verification) => job.company === verification.company) ? (<TfiFaceSmile/>) : (<TfiFaceSad/>) }</li> 
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+            <div>
+                <Link to='/create_job'>Create a new job</Link>
+            </div>
+        </div>
     </div>
-    {errors.length > 0 && (
-      <ul className="errors" style={{ color: "red" }}>
-        {errors.map((error) => (
-          <li key={error}>{error}</li>
-        ))}
-      </ul>
-    )}
-    <div className="profile-actions">
-      <Link to="/edit_profile">Edit Profile</Link>
-      <button onClick={() => handleDeleteUserProfile(user.id)}>
-        Delete Profile
-      </button>
-    </div>
-    <div className="profile-jobs">
-      <h2>Jobs:</h2>
-      <ul>
-        {user.jobs.map((job) => {
-          console.log(user.verifications);
-          return (
-            <Link key={job.id} to={`my_jobs/${job.id}`}>
-              <li>
-                {job.company}{" "}
-                {user.verifications.filter(
-                  (verification) => job.company === verification.company
-                ) ? (
-                  <TfiFaceSmile />
-                ) : (
-                  <TfiFaceSad />
-                )}
-              </li>
-            </Link>
-          );
-        })}
-      </ul>
-    </div>
-    <div className="create-job">
-      <Link to="/create_job">Create a new job</Link>
-    </div>
-  </div>
   )
 }
 

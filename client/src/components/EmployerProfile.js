@@ -63,7 +63,7 @@ function EmployerProfile({ setVerifications, verifications }) {
     })
   }
   return (
-    <div>
+    <div className="employerProf">
       <div>
         <div>
           <h2>
@@ -92,7 +92,7 @@ function EmployerProfile({ setVerifications, verifications }) {
         <div>
           <div>
             {jobs
-              .filter((job) => job.company.includes(`${user.company}`))
+              .filter((job) => job.company.includes(`${user.company}`&& job.verified !== true ))
               .map((filteredJob) => (
                 <div key={filteredJob.id}>
                   <ul>
